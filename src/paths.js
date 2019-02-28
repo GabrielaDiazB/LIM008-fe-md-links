@@ -1,14 +1,31 @@
-let path = require('path');
-const pathType = (path) => {
-  return pathType.isAbsolute(path);
+const path = require('path');
+const fs = require('fs');
+
+// Pregunta si la ruta es absoluta
+export const pathType = (route) => {
+  const isPathAbsolute = path.isAbsolute(route);
+  return isPathAbsolute;
 };
 
-// let path = require('path');
-// let fileRoute = path.isAbsolute('path.js');
-// let routeArr = [];
-// if (!fileRoute) {
-//   routeArr.push(path.resolve('path.js'));
-// } else {
-//   routeArr.push(path);
-// }
-// console.log(routeArr);
+// Transforma la ruta relativa a absoluta
+export const convertPathToAbsolute = (route) => {
+  const absolutePath = path.resolve(route);
+  return absolutePath;
+};
+
+// Pregunta si la ruta es un archivo/directorio
+export const pathIsFile = (route) => {
+  const filePathStat = fs.lstatSync(route);
+  const checkFilePath = filePathStat.isFile();
+  return checkFilePath;
+};
+
+// Pregunta si la ruta es un directorio
+export const pathIsDirectory = (route) => {
+  const directoryPathStat = fs.lstatSync(route);
+  const checkDirectoryPath = directoryPathStat.isDirectory();
+  return checkDirectoryPath;
+};
+
+// En caso es una directorio, ingresar al directorio
+
