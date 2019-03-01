@@ -28,9 +28,9 @@ export const pathIsDirectory = (route) => {
 };
 
 
-// En caso es un directorio, ingresar al directorio
+// // En caso es un directorio, ingresar al directorio
 
-export const walkIntoDirectory = (dirRoute) => {
+const walkIntoDirectory = (dirRoute) => {
   let arrFilesRoutes = [];  
   const files = fs.readdirSync(dirRoute);
   for (let i = 0; i < files.length; i++) {
@@ -43,4 +43,12 @@ export const walkIntoDirectory = (dirRoute) => {
   }
   return arrFilesRoutes; 
 };
-// console.log(walkIntoDirectory('C:\\Users\\Laboratoria\\Documents\\Gabrieladiazbravo\\Proyectos\\LIM008-fe-md-links\\test\\prueba\\prueba2'));
+// console.log(walkIntoDirectory('C:\\Users\\Laboratoria\\Documents\\Gabrieladiazbravo\\Proyectos\\LIM008-fe-md-links\\test'));
+
+// // Filtrar archivos ".md"
+const filterMdFiles = (arr) => {
+  arr.filter = (ele) => {
+    return ele.includes('md');
+  };
+};
+console.log(filterMdFiles(walkIntoDirectory('C:\\Users\\Laboratoria\\Documents\\Gabrieladiazbravo\\Proyectos\\LIM008-fe-md-links\\test')));
