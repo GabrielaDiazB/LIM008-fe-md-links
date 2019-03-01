@@ -27,5 +27,20 @@ export const pathIsDirectory = (route) => {
   return checkDirectoryPath;
 };
 
-// En caso es una directorio, ingresar al directorio
 
+// En caso es un directorio, ingresar al directorio
+
+export const walkIntoDirectory = (dirRoute) => {
+  let arrFilesRoutes = [];  
+  const files = fs.readdirSync(dirRoute);
+  for (let i = 0; i < files.length; i++) {
+    const next = path.join(dirRoute, files[i]);
+    if (fs.statSync(next).isDirectory()) {
+      arrFilesRoutes = arrFilesRoutes.concat(walkIntoDirectory(next));
+    } else {
+      arrFilesRoutes.push(next);
+    }
+  }
+  return arrFilesRoutes; 
+};
+// console.log(walkIntoDirectory('C:\\Users\\Laboratoria\\Documents\\Gabrieladiazbravo\\Proyectos\\LIM008-fe-md-links\\test\\prueba\\prueba2'));
