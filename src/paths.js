@@ -27,7 +27,6 @@ export const pathIsDirectory = (route) => {
   return checkDirectoryPath;
 };
 
-
 // // En caso es un directorio, ingresar al directorio
 
 const walkIntoDirectory = (dirRoute) => {
@@ -45,10 +44,26 @@ const walkIntoDirectory = (dirRoute) => {
 };
 // console.log(walkIntoDirectory('C:\\Users\\Laboratoria\\Documents\\Gabrieladiazbravo\\Proyectos\\LIM008-fe-md-links\\test'));
 
-// // Filtrar archivos ".md"
-const filterMdFiles = (arr) => {
-  arr.filter = (ele) => {
-    return ele.includes('md');
-  };
+// Filtrar archivos ".md"
+const filterMdFiles = (filesArr) => {
+  const newArr = [];
+  filesArr.forEach((element) => {
+    if (path.extname(element) === '.md') {
+      return newArr.push(element);
+    }
+  });
+  return newArr;
 };
-console.log(filterMdFiles(walkIntoDirectory('C:\\Users\\Laboratoria\\Documents\\Gabrieladiazbravo\\Proyectos\\LIM008-fe-md-links\\test')));
+// console.log(filterMdFiles(walkIntoDirectory('C:\\Users\\Laboratoria\\Documents\\Gabrieladiazbravo\\Proyectos\\LIM008-fe-md-links\\test')));
+
+// Extraer el contenido de los archivos
+
+const extractContent = (newArr) => {
+  const filesContent = [];
+  newArr.forEach((element) => {
+    const openFileAndExtract = fs.readFileSync(element, 'utf-8');
+    return filesContent.push(openFileAndExtract);
+  });
+  return filesContent;
+};
+console.log(extractContent(filterMdFiles(walkIntoDirectory('C:\\Users\\Laboratoria\\Documents\\Gabrieladiazbravo\\Proyectos\\LIM008-fe-md-links\\test'))));
