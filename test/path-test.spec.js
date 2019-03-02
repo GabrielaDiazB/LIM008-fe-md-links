@@ -1,8 +1,23 @@
 import { pathType, convertPathToAbsolute, pathIsFile, pathIsDirectory, walkIntoDirectory } from '../src/paths.js';
+import { filterMdFiles, extractFilesContent } from '../src/arrays.js';
+
+const input1 = ['C:\\Users\\Laboratoria\\Documents\\Gabrieladiazbravo\\Proyectos\\LIM008-fe-md-links\\test\\prueba\\archivo1.md',
+  'C:\\Users\\Laboratoria\\Documents\\Gabrieladiazbravo\\Proyectos\\LIM008-fe-md-links\\test\\prueba\\prueba2\\archivo2.txt',
+  'C:\\Users\\Laboratoria\\Documents\\Gabrieladiazbravo\\Proyectos\\LIM008-fe-md-links\\test\\prueba\\prueba2\\prueba3\\archivo3.txt',
+  'C:\\Users\\Laboratoria\\Documents\\Gabrieladiazbravo\\Proyectos\\LIM008-fe-md-links\\test\\prueba\\prueba2\\prueba3\\archivo4.md',
+  'C:\\Users\\Laboratoria\\Documents\\Gabrieladiazbravo\\Proyectos\\LIM008-fe-md-links\\test\\prueba\\prueba2\\prueba3\\archivo5.md'];
+
+const input2 = ['C:\\Users\\Laboratoria\\Documents\\Gabrieladiazbravo\\Proyectos\\LIM008-fe-md-links\\test\\prueba\\archivo1.md',
+'C:\\Users\\Laboratoria\\Documents\\Gabrieladiazbravo\\Proyectos\\LIM008-fe-md-links\\test\\prueba\\prueba2\\prueba3\\archivo4.md'];
 
 const output1 = [ 'C:\\Users\\Laboratoria\\Documents\\Gabrieladiazbravo\\Proyectos\\LIM008-fe-md-links\\test\\prueba\\prueba2\\archivo2.txt',
   'C:\\Users\\Laboratoria\\Documents\\Gabrieladiazbravo\\Proyectos\\LIM008-fe-md-links\\test\\prueba\\prueba2\\prueba3\\archivo3.txt',
-  'C:\\Users\\Laboratoria\\Documents\\Gabrieladiazbravo\\Proyectos\\LIM008-fe-md-links\\test\\prueba\\prueba2\\prueba3\\archivo4.txt' ];
+  'C:\\Users\\Laboratoria\\Documents\\Gabrieladiazbravo\\Proyectos\\LIM008-fe-md-links\\test\\prueba\\prueba2\\prueba3\\archivo4.md',
+  'C:\\Users\\Laboratoria\\Documents\\Gabrieladiazbravo\\Proyectos\\LIM008-fe-md-links\\test\\prueba\\prueba2\\prueba3\\archivo5.md'];
+
+const output2 = ['C:\\Users\\Laboratoria\\Documents\\Gabrieladiazbravo\\Proyectos\\LIM008-fe-md-links\\test\\prueba\\archivo1.md',
+  'C:\\Users\\Laboratoria\\Documents\\Gabrieladiazbravo\\Proyectos\\LIM008-fe-md-links\\test\\prueba\\prueba2\\prueba3\\archivo4.md',
+  'C:\\Users\\Laboratoria\\Documents\\Gabrieladiazbravo\\Proyectos\\LIM008-fe-md-links\\test\\prueba\\prueba2\\prueba3\\archivo5.md'];
 
 describe('pathType', () => {
   it('Debería ser una función', () => {
@@ -55,5 +70,20 @@ describe('walkIntoDirectory', () => {
   });
   it('Debería devolver un array de todos los archivos dentro de la carpeta', () => {
     expect(walkIntoDirectory('C:\\Users\\Laboratoria\\Documents\\Gabrieladiazbravo\\Proyectos\\LIM008-fe-md-links\\test\\prueba\\prueba2')).toEqual(output1);
+  });
+});
+
+describe('filterMdFiles', () => {
+  it('Debería ser una función', () => {
+    expect(typeof filterMdFiles).toBe('function');
+  });
+  it('Debería devolver un array nuevo con solo los archivos md', () => {
+    expect(filterMdFiles(input1)).toEqual(output2);
+  });
+});
+
+describe('extractFilesContent', () => {
+  it('debería ser una función', () => {
+    expect(typeof extractFilesContent).toBe('function');
   });
 });
