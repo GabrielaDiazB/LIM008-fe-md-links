@@ -69,17 +69,20 @@ export const extractFilesContent = (newArr) => {
 // extraer los Links de cada archivo
 export const extractLinks = (mdArr) => {
   let linksArr = [];
-  let namesArr = [];
-  mdArr.forEach((ele) => {
-    const openFile = fs.readFileSync(ele, 'utf-8');
+  mdArr.forEach((element) => {
+    const openFile = fs.readFileSync(element, 'utf-8');
     const regEx = /!*\[(.*)\]\((.*)\)/g;
     // /!*\[(.*)\]\((.*)\)/g
     // /\[((.+?))\]\((http|https).+?\)/g
-    const textLink = /\[(.*)\]/gi;
+    // const nameLink = /\[(.*)\]/g;
+    // const textLink = /\((http|https).+?\)/g;
     let link = openFile.match(regEx);
-    let name = openFile.match(textLink);
-    return linksArr.push(link);
+    // let name = openFile.match(nameLink);
+    // let text = openFile.match(textLink);
+    if (link !== null) { 
+      return linksArr.push(link);
+    }
   });
   return linksArr;
 };
-console.log(extractLinks(filterMdFiles(walkIntoDirectory('D:\\usuario\\Documents\\Laboratoria\\projects\\proyecto-markdown\\LIM008-fe-md-links\\test'))));
+console.log(extractLinks(filterMdFiles(walkIntoDirectory('C:\\Users\\Laboratoria\\Documents\\Gabrieladiazbravo\\Proyectos\\LIM008-fe-md-links\\test'))));
