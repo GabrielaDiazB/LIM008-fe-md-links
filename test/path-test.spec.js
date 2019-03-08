@@ -1,5 +1,5 @@
 import { pathType, convertPathToAbsolute, pathIsFile, pathIsDirectory, walkIntoDirectory } from '../src/paths.js';
-import { filterMdFiles, extractFilesContent } from '../src/arrays.js';
+import { filterMdFiles, /* extractFilesContent,*/ extractLinks } from '../src/arrays.js';
 
 const input1 = ['C:\\Users\\Laboratoria\\Documents\\Gabrieladiazbravo\\Proyectos\\LIM008-fe-md-links\\test\\prueba\\archivo1.md',
   'C:\\Users\\Laboratoria\\Documents\\Gabrieladiazbravo\\Proyectos\\LIM008-fe-md-links\\test\\prueba\\prueba2\\archivo2.txt',
@@ -18,6 +18,17 @@ const output1 = [ 'C:\\Users\\Laboratoria\\Documents\\Gabrieladiazbravo\\Proyect
 const output2 = ['C:\\Users\\Laboratoria\\Documents\\Gabrieladiazbravo\\Proyectos\\LIM008-fe-md-links\\test\\prueba\\archivo1.md',
   'C:\\Users\\Laboratoria\\Documents\\Gabrieladiazbravo\\Proyectos\\LIM008-fe-md-links\\test\\prueba\\prueba2\\prueba3\\archivo4.md',
   'C:\\Users\\Laboratoria\\Documents\\Gabrieladiazbravo\\Proyectos\\LIM008-fe-md-links\\test\\prueba\\prueba2\\prueba3\\archivo5.md'];
+
+const output3 = [
+  { file: 'D:\\usuario\\Documents\\Laboratoria\\projects\\proyecto-markdown\\LIM008-fe-md-links\\test\\prueba\\archivo1.md',
+    href: [ 'https://es.wikipedia.org/wiki/Markdown' ],
+    text: [ 'Markdown' ] },
+  { file: 'D:\\usuario\\Documents\\Laboratoria\\projects\\proyecto-markdown\\LIM008-fe-md-links\\test\\prueba\\prueba2\\prueba3\\archivo4.md',
+    href: [ 'https://nodejs.org/es/' ],
+    text: [ 'Node.js' ] },
+  { file: 'D:\\usuario\\Documents\\Laboratoria\\projects\\proyecto-markdown\\LIM008-fe-md-links\\test\\prueba\\prueba2\\prueba3\\archivo4.md',
+    href: [ 'https://developers.google.com/v8/' ],
+    text: [ 'motor de JavaScript V8 de Chrome' ] }]  
 
 describe('pathType', () => {
   it('Debería ser una función', () => {
@@ -82,8 +93,14 @@ describe('filterMdFiles', () => {
   });
 });
 
-describe('extractFilesContent', () => {
+/* describe('extractFilesContent', () => {
   it('debería ser una función', () => {
     expect(typeof extractFilesContent).toBe('function');
+  });
+}); */
+
+describe('extractLinks', () => {
+  it('Debería devolver un array de objetos con 3 propiedades', () => {
+    expect(extractLinks(filterMdFiles(walkIntoDirectory('D:\\usuario\\Documents\\Laboratoria\\projects\\proyecto-markdown\\LIM008-fe-md-links\\test')))).toEqual(output3);
   });
 });
