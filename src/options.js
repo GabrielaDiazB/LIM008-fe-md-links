@@ -1,5 +1,5 @@
 import {extractLinks} from './arrays.js';
-const fetch = require('node-fetch');
+import fetch from 'node-fetch';
 
 // Función para Validar los links
 const validateLinks = (data) => {
@@ -9,12 +9,12 @@ const validateLinks = (data) => {
     return linksHref
       .then(response => {
         links.status = response.status;
-        links.message = response.statusText;
+        links.message = response.statusText; // ternario
         resolve(links);
       })
       .catch(error => {
-        links.status = 400;
-        links.message = 'Not Found';
+        links.status = '';
+        links.message = 'Fail';
         resolve(links);
       });
   }));

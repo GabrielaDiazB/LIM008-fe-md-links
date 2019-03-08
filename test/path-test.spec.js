@@ -1,33 +1,34 @@
 import { pathType, convertPathToAbsolute, pathIsFile, pathIsDirectory, walkIntoDirectory } from '../src/paths.js';
-import { filterMdFiles, /* extractFilesContent,*/ extractLinks } from '../src/arrays.js';
+import { filterMdFiles, extractLinks } from '../src/arrays.js';
 
-const input1 = ['C:\\Users\\Laboratoria\\Documents\\Gabrieladiazbravo\\Proyectos\\LIM008-fe-md-links\\test\\prueba\\archivo1.md',
-  'C:\\Users\\Laboratoria\\Documents\\Gabrieladiazbravo\\Proyectos\\LIM008-fe-md-links\\test\\prueba\\prueba2\\archivo2.txt',
-  'C:\\Users\\Laboratoria\\Documents\\Gabrieladiazbravo\\Proyectos\\LIM008-fe-md-links\\test\\prueba\\prueba2\\prueba3\\archivo3.txt',
-  'C:\\Users\\Laboratoria\\Documents\\Gabrieladiazbravo\\Proyectos\\LIM008-fe-md-links\\test\\prueba\\prueba2\\prueba3\\archivo4.md',
-  'C:\\Users\\Laboratoria\\Documents\\Gabrieladiazbravo\\Proyectos\\LIM008-fe-md-links\\test\\prueba\\prueba2\\prueba3\\archivo5.md'];
+const input1 = [`${process.cwd()}\\test\\prueba\\archivo1.md`,
+  `${process.cwd()}\\test\\prueba\\archivo2.txt`,
+  `${process.cwd()}\\test\\prueba\\archivo3.txt`,
+  `${process.cwd()}\\test\\prueba\\archivo4.md`,
+  `${process.cwd()}\\test\\prueba\\archivo5.md`];
 
-const input2 = ['C:\\Users\\Laboratoria\\Documents\\Gabrieladiazbravo\\Proyectos\\LIM008-fe-md-links\\test\\prueba\\archivo1.md',
-  'C:\\Users\\Laboratoria\\Documents\\Gabrieladiazbravo\\Proyectos\\LIM008-fe-md-links\\test\\prueba\\prueba2\\prueba3\\archivo4.md'];
+const input2 = [`${process.cwd()}\\test\\prueba\\archivo1.md`,
+  `${process.cwd()}\\test\\prueba\\archivo4.md`];
 
-const output1 = [ 'C:\\Users\\Laboratoria\\Documents\\Gabrieladiazbravo\\Proyectos\\LIM008-fe-md-links\\test\\prueba\\prueba2\\archivo2.txt',
-  'C:\\Users\\Laboratoria\\Documents\\Gabrieladiazbravo\\Proyectos\\LIM008-fe-md-links\\test\\prueba\\prueba2\\prueba3\\archivo3.txt',
-  'C:\\Users\\Laboratoria\\Documents\\Gabrieladiazbravo\\Proyectos\\LIM008-fe-md-links\\test\\prueba\\prueba2\\prueba3\\archivo4.md',
-  'C:\\Users\\Laboratoria\\Documents\\Gabrieladiazbravo\\Proyectos\\LIM008-fe-md-links\\test\\prueba\\prueba2\\prueba3\\archivo5.md'];
+const output1 = [`${process.cwd()}\\test\\prueba\\archivo1.md`,
+  `${process.cwd()}\\test\\prueba\\prueba2\\archivo2.txt`,
+  `${process.cwd()}\\test\\prueba\\prueba2\\prueba3\\archivo3.txt`,
+  `${process.cwd()}\\test\\prueba\\prueba2\\prueba3\\archivo4.md`,
+  `${process.cwd()}\\test\\prueba\\prueba2\\prueba3\\archivo5.md`];
 
-const output2 = ['C:\\Users\\Laboratoria\\Documents\\Gabrieladiazbravo\\Proyectos\\LIM008-fe-md-links\\test\\prueba\\archivo1.md',
-  'C:\\Users\\Laboratoria\\Documents\\Gabrieladiazbravo\\Proyectos\\LIM008-fe-md-links\\test\\prueba\\prueba2\\prueba3\\archivo4.md',
-  'C:\\Users\\Laboratoria\\Documents\\Gabrieladiazbravo\\Proyectos\\LIM008-fe-md-links\\test\\prueba\\prueba2\\prueba3\\archivo5.md'];
+const output2 = [`${process.cwd()}\\test\\prueba\\archivo1.md`,
+  `${process.cwd()}\\test\\prueba\\archivo4.md`,
+  `${process.cwd()}\\test\\prueba\\archivo5.md`];
 
 const output3 = [
-  { file: 'D:\\usuario\\Documents\\Laboratoria\\projects\\proyecto-markdown\\LIM008-fe-md-links\\test\\prueba\\archivo1.md',
+  { file: `${process.cwd()}\\test\\prueba\\archivo1.md`,
     href: [ 'https://es.wikipedia.org/wiki/Markdown' ],
     text: [ 'Markdown' ] },
-  { file: 'D:\\usuario\\Documents\\Laboratoria\\projects\\proyecto-markdown\\LIM008-fe-md-links\\test\\prueba\\prueba2\\prueba3\\archivo4.md',
+  { file: `${process.cwd()}\\test\\prueba\\prueba2\\prueba3\\archivo4.md`,
     href: [ 'https://nodejs.org/es/' ],
     text: [ 'Node.js' ] },
-  { file: 'D:\\usuario\\Documents\\Laboratoria\\projects\\proyecto-markdown\\LIM008-fe-md-links\\test\\prueba\\prueba2\\prueba3\\archivo4.md',
-    href: [ 'https://developers.google.com/v8/' ],
+  { file: `${process.cwd()}\\test\\prueba\\prueba2\\prueba3\\archivo4.md`,
+    href: [ 'https://developers.gfailoogle.com/v8/' ],
     text: [ 'motor de JavaScript V8 de Chrome' ] }]  
 
 describe('pathType', () => {
@@ -35,7 +36,7 @@ describe('pathType', () => {
     expect(typeof pathType).toBe('function');
   });
   it('Debería decir verdadero si la ruta es absoluta', () => {
-    expect(pathType('D:\\usuario\\Documents\\Laboratoria\\projects\\proyecto markdown\\LIM008-fe-md-links\\test\\prueba\\archivo1.md')).toEqual(true);
+    expect(pathType(`${process.cwd()}\\test\\prueba\\archivo1.md`)).toEqual(true);
   });
   it('Debería decir falso si la ruta es relativa', () => {
     expect(pathType('archivo1.md')).toEqual(false);
@@ -47,7 +48,7 @@ describe('convertPathToAbsolute', () => {
     expect(typeof convertPathToAbsolute).toEqual('function');
   });
   it('Debería convertir la ruta relativa en absoluta', () => {
-    expect(convertPathToAbsolute('test\\prueba\\archivo1.md')).toBe('C:\\Users\\Laboratoria\\Documents\\Gabrieladiazbravo\\Proyectos\\LIM008-fe-md-links\\test\\prueba\\archivo1.md');
+    expect(convertPathToAbsolute('test\\prueba\\archivo1.md')).toBe(`${process.cwd()}\\test\\prueba\\archivo1.md`);
   });
 });
 
@@ -56,10 +57,10 @@ describe('pathIsFile', () => {
     expect(typeof pathIsFile).toEqual('function');
   });
   it('Debería decir verdadero si la ruta es un archivo', () => {
-    expect(pathIsFile('C:\\Users\\Laboratoria\\Documents\\Gabrieladiazbravo\\Proyectos\\LIM008-fe-md-links\\test\\prueba\\archivo1.md')).toEqual(true);
+    expect(pathIsFile(`${process.cwd()}\\test\\prueba\\archivo1.md`)).toEqual(true);
   });
   it('Debería decir falso si la ruta no es un archivo', () => {
-    expect(pathIsFile('C:\\Users\\Laboratoria\\Documents\\Gabrieladiazbravo\\Proyectos\\LIM008-fe-md-links\\test\\prueba')).toEqual(false);
+    expect(pathIsFile(`${process.cwd()}\\test\\prueba`)).toEqual(false);
   });
 });
 
@@ -68,10 +69,10 @@ describe('pathIsDirectory', () => {
     expect(typeof pathIsDirectory).toBe('function');
   });
   it('Debería decir verdadero si la ruta es un directorio', () => {
-    expect(pathIsDirectory('C:\\Users\\Laboratoria\\Documents\\Gabrieladiazbravo\\Proyectos\\LIM008-fe-md-links\\test\\prueba')).toEqual(true);
+    expect(pathIsDirectory(`${process.cwd()}\\test\\prueba`)).toEqual(true);
   });
   it('Debería decir falso si la ruta no es un directorio', () => {
-    expect(pathIsDirectory('C:\\Users\\Laboratoria\\Documents\\Gabrieladiazbravo\\Proyectos\\LIM008-fe-md-links\\test\\prueba\\archivo1.md')).toEqual(false);
+    expect(pathIsDirectory(`${process.cwd()}\\test\\prueba\\archivo1.md`)).toEqual(false);
   });
 });
 
@@ -79,8 +80,11 @@ describe('walkIntoDirectory', () => {
   it('Debería ser una función', () => {
     expect(typeof walkIntoDirectory).toBe('function');
   });
-  it('Debería devolver un array de todos los archivos dentro de la carpeta', () => {
-    expect(walkIntoDirectory('C:\\Users\\Laboratoria\\Documents\\Gabrieladiazbravo\\Proyectos\\LIM008-fe-md-links\\test\\prueba\\prueba2')).toEqual(output1);
+  it('Si se ingresa la ruta de un archivo, debería devoler un array con el archivo', () => {
+    expect(walkIntoDirectory(`${process.cwd()}\\test\\prueba\\archivo1.md`)).toEqual([`${process.cwd()}\\test\\prueba\\archivo1.md`])
+  });
+  it('Si se ingresa la ruta de un directorio, debería devolver un array de todos los archivos dentro de la carpeta', () => {
+    expect(walkIntoDirectory(`${process.cwd()}\\test\\prueba`)).toEqual(output1);
   });
 });
 
@@ -101,6 +105,6 @@ describe('filterMdFiles', () => {
 
 describe('extractLinks', () => {
   it('Debería devolver un array de objetos con 3 propiedades', () => {
-    expect(extractLinks(filterMdFiles(walkIntoDirectory('D:\\usuario\\Documents\\Laboratoria\\projects\\proyecto-markdown\\LIM008-fe-md-links\\test')))).toEqual(output3);
+    expect(extractLinks(`${process.cwd()}\\test`)).toEqual(output3);
   });
 });
