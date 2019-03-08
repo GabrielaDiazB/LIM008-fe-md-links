@@ -7,9 +7,6 @@ const input1 = [`${process.cwd()}\\test\\prueba\\archivo1.md`,
   `${process.cwd()}\\test\\prueba\\archivo4.md`,
   `${process.cwd()}\\test\\prueba\\archivo5.md`];
 
-const input2 = [`${process.cwd()}\\test\\prueba\\archivo1.md`,
-  `${process.cwd()}\\test\\prueba\\archivo4.md`];
-
 const output1 = [`${process.cwd()}\\test\\prueba\\archivo1.md`,
   `${process.cwd()}\\test\\prueba\\prueba2\\archivo2.txt`,
   `${process.cwd()}\\test\\prueba\\prueba2\\prueba3\\archivo3.txt`,
