@@ -1,5 +1,5 @@
-import { pathType, convertPathToAbsolute, pathIsFile, pathIsDirectory, walkIntoDirectory } from '../src/paths.js';
-import { filterMdFiles, extractLinks } from '../src/arrays.js';
+import { pathType, convertPathToAbsolute, pathIsFile, pathIsDirectory, walkIntoDirectory } from '../src/functions-controller/paths.js';
+import { filterMdFiles, extractLinks } from '../src/functions-controller/arrays.js';
 
 const input1 = [`${process.cwd()}\\test\\prueba\\archivo1.md`,
   `${process.cwd()}\\test\\prueba\\archivo2.txt`,
@@ -22,11 +22,11 @@ const output3 = [
     href: [ 'https://es.wikipedia.org/wiki/Markdown' ],
     text: [ 'Markdown' ] },
   { file: `${process.cwd()}\\test\\prueba\\prueba2\\prueba3\\archivo4.md`,
-    href: [ 'https://nodejs.org/es/' ],
+    href: [ 'https://github.com/Laboratoria/LIM008-fe-md-lin' ],
     text: [ 'Node.js' ] },
   { file: `${process.cwd()}\\test\\prueba\\prueba2\\prueba3\\archivo4.md`,
     href: [ 'https://developers.gfailoogle.com/v8/' ],
-    text: [ 'motor de JavaScript V8 de Chrome' ] }]  
+    text: [ 'motor de JavaScript V8 de Chrome' ] }]; 
 
 describe('pathType', () => {
   it('Debería ser una función', () => {
@@ -78,7 +78,7 @@ describe('walkIntoDirectory', () => {
     expect(typeof walkIntoDirectory).toBe('function');
   });
   it('Si se ingresa la ruta de un archivo, debería devoler un array con el archivo', () => {
-    expect(walkIntoDirectory(`${process.cwd()}\\test\\prueba\\archivo1.md`)).toEqual([`${process.cwd()}\\test\\prueba\\archivo1.md`])
+    expect(walkIntoDirectory(`${process.cwd()}\\test\\prueba\\archivo1.md`)).toEqual([`${process.cwd()}\\test\\prueba\\archivo1.md`]);
   });
   it('Si se ingresa la ruta de un directorio, debería devolver un array de todos los archivos dentro de la carpeta', () => {
     expect(walkIntoDirectory(`${process.cwd()}\\test\\prueba`)).toEqual(output1);
@@ -101,6 +101,9 @@ describe('filterMdFiles', () => {
 }); */
 
 describe('extractLinks', () => {
+  it('Debería de ser una función', () => {
+    expect(typeof extractLinks).toBe('function');
+  });
   it('Debería devolver un array de objetos con 3 propiedades', () => {
     expect(extractLinks(`${process.cwd()}\\test`)).toEqual(output3);
   });
