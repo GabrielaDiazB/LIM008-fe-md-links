@@ -1,11 +1,10 @@
 import {extractLinks} from './functions-controller/arrays.js';
 import {validateLinks, getLinksStats, getBrokenLinksStats} from './functions-controller/options.js';
 
-/* const options = {
-  validate: true,
-  stats: true
-}; */
-
+// const options = {
+//   validate: true,
+//   stats: false,
+// }
 export const mdLinks = (path, options) => {
 
   if (options.validate && !options.stats) {
@@ -23,4 +22,4 @@ export const mdLinks = (path, options) => {
       .then(response => console.log(response));
   } 
 };
-/* mdLinks(`${process.cwd()}\\test`, options); */
+mdLinks(`${process.cwd()}\\test`, options);

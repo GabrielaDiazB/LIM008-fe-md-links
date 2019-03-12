@@ -10,7 +10,7 @@ export const validateLinks = (data) => {
       .then(response => {
         if (response.status >= 200 && response.status < 400) {
           links.status = response.status;
-          links.message = response.statusText; // o función ternaria
+          links.message = response.statusText;
           resolve(links);
         } else {
           links.status = response.status;
