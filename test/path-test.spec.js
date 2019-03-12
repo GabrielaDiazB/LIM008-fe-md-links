@@ -19,14 +19,14 @@ const output2 = [`${process.cwd()}\\test\\prueba\\archivo1.md`,
 
 const output3 = [
   { file: `${process.cwd()}\\test\\prueba\\archivo1.md`,
-    href: [ 'https://es.wikipedia.org/wiki/Markdown' ],
-    text: [ 'Markdown' ] },
+    href: 'https://es.wikipedia.org/wiki/Markdown',
+    text: 'Markdown'},
   { file: `${process.cwd()}\\test\\prueba\\prueba2\\prueba3\\archivo4.md`,
-    href: [ 'https://github.com/Laboratoria/LIM008-fe-md-lin' ],
-    text: [ 'Node.js' ] },
+    href: 'https://github.com/Laboratoria/LIM008-fe-md-lin',
+    text: 'Node.js'},
   { file: `${process.cwd()}\\test\\prueba\\prueba2\\prueba3\\archivo4.md`,
-    href: [ 'https://developers.gfailoogle.com/v8/' ],
-    text: [ 'motor de JavaScript V8 de Chrome' ] }]; 
+    href: 'https://developers.gfailoogle.com/v8/',
+    text: 'motor de JavaScript V8 de Chrome' }]; 
 
 describe('pathType', () => {
   it('Debería ser una función', () => {

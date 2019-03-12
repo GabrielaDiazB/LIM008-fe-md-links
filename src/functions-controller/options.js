@@ -44,6 +44,7 @@ export const getLinksStats = (path) => {
       .catch(error => reject(error));
   });
 };
+
 /* getLinksStats(`${process.cwd()}\\test`)
   .then(response => console.log(response)); */
 

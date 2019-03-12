@@ -27,8 +27,8 @@ export const extractLinks = (path) => {
     const listLinksMd = openFile.match(regEx);
     if (listLinksMd !== null) {
       listLinksMd.forEach(link => {
-        const href = link.match(regExHref);
-        const name = link.match(regExNameLink);
+        const href = link.match(regExHref).toString();
+        const name = link.match(regExNameLink).toString();
         linksArr.push({
           file: elementPath,
           href: href,
@@ -39,4 +39,4 @@ export const extractLinks = (path) => {
   });
   return linksArr;
 };
-// console.log(extractLinks('D:\\usuario\\Documents\\Laboratoria\\projects\\proyecto-markdown\\LIM008-fe-md-links\\test'));
+// console.log(extractLinks(`${process.cwd()}\\test`));

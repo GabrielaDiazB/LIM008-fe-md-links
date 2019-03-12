@@ -1,24 +1,48 @@
 #!/usr/bin/env node
-import {mdLinks} from './index.js'
+import {mdLinks} from './index.js';
+import { getLinksStats, getBrokenLinksStats } from './functions-controller/options.js';
 
-const arg = process.argv.slice(2);
-if(arg.length === 1) {
-    mdLinks(arg[0], options).then
+const args = process.argv.slice(2);
+
+const options = {
+  validate: false,
+  stats: false
+};
+
+if (args.length === 0) {
+  console.log('Por favor ingrese una ruta');
 }
-if(arg.length === 2) {
-    if(arg[1] === '--stats') {
-      console.log('Debería devolver Total y Uniques').then
-    }
-    if(arg[1] === '--validate') {
-      console.log('5 propiedades Href, File, Text, Status, Message').then
-    }
+
+if (args.length === 1) {
+  mdLinks(args[0], options)
+    .then(response => response.forEach((links) => console.log(`\n Path :${links.file} \n Link : ${links.href}  \n Texto : ${links.text}`)))
+    .catch(error => console.log(error));
+};
+
+if (args.length === 2) {
+  if (args[1] === '--stats' || args[1] === '--s') {
+    options.stats = true;
+    getLinksStats(args[0])
+      .then(response => console.log(response))
+      .catch(error => console.log(error));
+  }
+
+  if (args[1] === '--validate' || args[1] === '--v') {
+    options.validate = true;
+    mdLinks(args[0], options)
+      .then(response => response.forEach((links) => console.log(`\n Path :${links.file} \n Link : ${links.href} \n Status: ${values.status}\n StatusText: ${values.message} \n texto : ${links.text} `)))
+      .catch(error => console.log(error));
+  }
 }
-if(arg.length === 3) {
-    if(arg[2] === '--stats --validate' || arg[2] === '--validate --stats') {
-      console.log('Debe devoler total, uniques broken')
-    } else {
-      console.log('No son valores válidos')
-    }
-}
-console.log('Hello World')
+
+if (args.length === 3) {
+  if (args[1] === '--validate' && args[2] === '--stats' || args[1] === '--stats' && args[2] === '--validate') {
+    options.validate = true;
+    options.stats = true;
+    Promise.all([getLinksStats(args[0]), getBrokenLinksStats(args[0])])
+      .then(response => response.forEach(properties => console.log(properties)))
+      .catch(error => console.log(error));
+  }
+};
+
 

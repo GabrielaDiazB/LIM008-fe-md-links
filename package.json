@@ -10,7 +10,7 @@
   ],
   "license": "MIT",
   "bin": {
-    "mdLinks": "./lib/cli.js"
+    "md-links": "./lib/cli.js"
   },
   "scripts": {
     "build": "babel src -d lib",
