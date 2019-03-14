@@ -2,7 +2,7 @@
   "name": "md-links",
   "version": "1.0.1",
   "description": "Markdown Links",
-  "main": "src/index.html",
+  "main": "./lib/index.js",
   "keywords": [
     "javascript",
     "npm",
