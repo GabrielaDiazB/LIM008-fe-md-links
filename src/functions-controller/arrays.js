@@ -1,4 +1,4 @@
-import {walkIntoDirectory, pathType, convertPathToAbsolute} from './paths.js';
+import {walkIntoDirectory} from './paths.js';
 const path = require('path');
 const fs = require('fs');
 
@@ -15,12 +15,7 @@ export const filterMdFiles = (filesArr) => {
 
 // une funciones y extrae los Links de cada archivo y los colocar en un objeto
 export const extractLinks = (path) => {
-  let absPath;
-  if (pathType(path) === false) {
-    absPath = convertPathToAbsolute(path);
-  }
-
-  const arrFiles = walkIntoDirectory(absPath);
+  const arrFiles = walkIntoDirectory(path);
   const arrMdFiles = filterMdFiles(arrFiles);
   let linksArr = [];
   const regEx = /!*\[(.*)\]\((.*)\)/g;
@@ -34,7 +29,7 @@ export const extractLinks = (path) => {
         const href = link.match(regExHref).toString();
         const name = link.match(regExNameLink).toString();
         linksArr.push({
-          file: elementPath,
+          file: path.resolve(elementPath),
           href: href,
           text: name,
         });
