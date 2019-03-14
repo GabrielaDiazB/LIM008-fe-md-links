@@ -28,7 +28,8 @@ if (args.length === 2) {
 
   if (args[1] === '--validate' || args[1] === '--v') {
     options.validate = true;
-    mdLinks(args[0], options).then(response.forEach((links) => console.log(`\n Path :${links.file} \n Link : ${links.href}${links.status}${links.message} \n texto : ${links.text} `)));
+    mdLinks(args[0], options)
+      .then(response => response.map(links => console.log(`\n Path :${links.file} \n Link : ${links.href}${links.status}${links.message} \n texto : ${links.text} `)))
   };
 };
 
@@ -41,3 +42,4 @@ if (args.length === 3) {
       .catch(error => console.log(error));
   }
 };
+// 
