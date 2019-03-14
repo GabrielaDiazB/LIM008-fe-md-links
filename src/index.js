@@ -13,4 +13,4 @@ export const mdLinks = (path, options) => {
     return new Promise(resolve => resolve(extractLinks(path)));
   }; 
 };
-console.log(mdLinks('test', options));
+// console.log(mdLinks('test', options));

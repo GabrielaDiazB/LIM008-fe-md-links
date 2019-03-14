@@ -13,12 +13,13 @@ export const filterMdFiles = (filesArr) => {
   return newArr;
 };
 
-// extrae los Links de cada archivo y los colocar en un objeto
+// une funciones y extrae los Links de cada archivo y los colocar en un objeto
 export const extractLinks = (path) => {
   let absPath;
   if (pathType(path) === false) {
     absPath = convertPathToAbsolute(path);
   }
+
   const arrFiles = walkIntoDirectory(absPath);
   const arrMdFiles = filterMdFiles(arrFiles);
   let linksArr = [];

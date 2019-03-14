@@ -27,6 +27,7 @@ export const validateLinks = (data) => {
   return Promise.all(runLinks);
 };
 
+
 // Función ver los Stats(total de links, links únicos) de los Links
 export const getLinksStats = (path) => {
   return new Promise((resolve, reject) => {
@@ -35,7 +36,6 @@ export const getLinksStats = (path) => {
         const totalLinks = response.length;
         const uniqueLinks = [...new Set(response.map(response => response.href))].length;
         resolve(`Total : ${totalLinks} Unique: ${uniqueLinks}`);
-        // resolve({total: totalLinks, unique: uniqueLinks});
       })
       .catch(error => reject(error));
   });
