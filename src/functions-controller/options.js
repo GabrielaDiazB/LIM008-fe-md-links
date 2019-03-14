@@ -4,7 +4,7 @@ import fetch from 'node-fetch';
 // Función para Validar los links
 export const validateLinks = (data) => {
   const objLinks = extractLinks(data);
-  const runLinks = objLinks.map((links) => new Promise((resolve, reject) => {
+  const runLinks = objLinks.map((links) => new Promise((resolve) => {
     const linksHref = fetch(links.href);
     return linksHref
       .then(response => {

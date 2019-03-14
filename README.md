@@ -23,7 +23,7 @@ La librería Markdown Links es una herramienta simple y práctica que extrae, an
 
 ### Flujograma de la librería
 
-![imagen](/images/diagrama.JPG)
+![imagen](/images/diagrama.jpg)
 
 #### Backlog de la creación de la librería
 

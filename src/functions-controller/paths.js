@@ -13,7 +13,7 @@ export const convertPathToAbsolute = (route) => {
   return absolutePath;
 };
 
-// Pregunta si la ruta es un archivo/directorio
+// Pregunta si la ruta es un archivo
 export const pathIsFile = (route) => {
   const filePathStat = fs.lstatSync(route);
   const checkFilePath = filePathStat.isFile();
@@ -45,4 +45,4 @@ export const walkIntoDirectory = (dirRoute) => {
   };  
   return arrFilesRoutes; 
 };
-// console.log(walkIntoDirectory('C:\\Users\\Laboratoria\\Documents\\Gabrieladiazbravo\\Proyectos\\LIM008-fe-md-links\\test'));
+// console.log(walkIntoDirectory(`${process.cwd()}\\test`));
