@@ -40,7 +40,7 @@ describe('getLinksStats', () => {
     expect(typeof getLinksStats).toBe('function');
   });
   it('Debería retornar un Objeto con dos propiedades, el total de links encontrados y la cantidad de links únicos', (done) => {
-    return new Promise((resolve, reject) => {
+    return new Promise((resolve) => {
       getLinksStats(`${process.cwd()}\\test`)
         .then((response) => {
           expect(response).toEqual('Total: 3 Unique: 3');
@@ -57,7 +57,7 @@ describe('getBrokenLinksStats', () => {
     expect(typeof getBrokenLinksStats).toBe('function');
   });
   it('Debería retornar el total de links rotos', (done) => {
-    return new Promise((resolve, reject) => {
+    return new Promise((resolve) => {
       getBrokenLinksStats(`${process.cwd()}\\test`)
         .then((response) => {
           expect(response).toEqual('Broken: 2');
