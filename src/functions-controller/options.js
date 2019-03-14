@@ -41,7 +41,6 @@ export const getLinksStats = (path) => {
   });
 };
 
-
 // Función para ver los links rotos
 export const getBrokenLinksStats = (path) => {
   return new Promise((resolve, reject) => {

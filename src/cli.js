@@ -42,4 +42,3 @@ if (args.length === 3) {
       .catch(error => console.log(error));
   }
 };
-// 
