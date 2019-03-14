@@ -18,7 +18,7 @@ export const extractLinks = (route) => {
   const arrFiles = walkIntoDirectory(route);
   const arrMdFiles = filterMdFiles(arrFiles);
   let linksArr = [];
-  const regEx = /!*\[(.*)\]\((.*)\)/g;
+  const regEx = /\[(.*)\]\((.*)\)/g;
   const regExHref = /(?:(http|https|ftp|ftps)?:\/\/[^\s]+.+?(?=\)))/g;
   const regExNameLink = /(?<=\[).+?(?=\])/g;
   arrMdFiles.forEach((elementPath) => {
