@@ -38,4 +38,3 @@ export const extractLinks = (route) => {
   });
   return linksArr;
 };
-// console.log(extractLinks('test'))

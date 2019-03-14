@@ -45,4 +45,3 @@ export const walkIntoDirectory = (dirRoute) => {
   };  
   return arrFilesRoutes; 
 };
-// console.log(walkIntoDirectory(`${process.cwd()}\\test`));
