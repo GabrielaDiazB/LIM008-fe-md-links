@@ -30,18 +30,14 @@ export const pathIsDirectory = (route) => {
 // En caso es un directorio, ingresar al directorio
 export const walkIntoDirectory = (dirRoute) => {
   let arrFilesRoutes = [];
-  if (pathIsFile(dirRoute)) {
-    arrFilesRoutes.push(dirRoute);
-  } else {
-    const files = fs.readdirSync(dirRoute);
-    for (let i = 0; i < files.length; i++) {
-      const next = path.join(dirRoute, files[i]);
-      if (pathIsDirectory(next)) {
-        arrFilesRoutes = arrFilesRoutes.concat(walkIntoDirectory(next));
-      } else {
-        arrFilesRoutes.push(next);
-      };
+  const files = fs.readdirSync(dirRoute);
+  for (let i = 0; i < files.length; i++) {
+    const next = path.join(dirRoute, files[i]);
+    if (pathIsDirectory(next)) {
+      arrFilesRoutes = arrFilesRoutes.concat(walkIntoDirectory(next));
+    } else {
+      arrFilesRoutes.push(next);
     };
-  };  
+  }; 
   return arrFilesRoutes; 
 };
