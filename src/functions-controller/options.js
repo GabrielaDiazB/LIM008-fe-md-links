@@ -27,10 +27,6 @@ export const validateLinks = (data) => {
   return Promise.all(runLinks);
 };
 
-/* validateLinks(`${process.cwd()}\\test`)
-  .then(response => console.log(response))
-  .catch(error => console.log(error)); */
-
 // Función ver los Stats(total de links, links únicos) de los Links
 export const getLinksStats = (path) => {
   return new Promise((resolve, reject) => {
@@ -45,8 +41,6 @@ export const getLinksStats = (path) => {
   });
 };
 
-/* getLinksStats(`${process.cwd()}\\test`)
-  .then(response => console.log(response)); */
 
 // Función para ver los links rotos
 export const getBrokenLinksStats = (path) => {
@@ -59,5 +53,4 @@ export const getBrokenLinksStats = (path) => {
       .catch(error => reject(error));
   });
 };
-/* getBrokenLinksStats(`${process.cwd()}\\test`)
-  .then(response => console.log(response)); */
+

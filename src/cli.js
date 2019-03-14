@@ -15,8 +15,7 @@ if (args.length === 0) {
 
 if (args.length === 1) {
   mdLinks(args[0], options)
-    .then(response => response.forEach((links) => console.log(`\n Path :${links.file} \n Link : ${links.href}  \n Texto : ${links.text}`)))
-    .catch(error => console.log(error));
+    .then(response => response.forEach((links) => console.log(`\n Path :${links.file} \n Link : ${links.href}  \n Texto : ${links.text}`)));
 };
 
 if (args.length === 2) {
@@ -25,15 +24,13 @@ if (args.length === 2) {
     getLinksStats(args[0])
       .then(response => console.log(response))
       .catch(error => console.log(error));
-  }
+  };
 
   if (args[1] === '--validate' || args[1] === '--v') {
     options.validate = true;
-    mdLinks(args[0], options)
-      .then(response => response.forEach((links) => console.log(`\n Path :${links.file} \n Link : ${links.href} \n Status: ${values.status}\n StatusText: ${values.message} \n texto : ${links.text} `)))
-      .catch(error => console.log(error));
-  }
-}
+    mdLinks(args[0], options).then(response.forEach((links) => console.log(`\n Path :${links.file} \n Link : ${links.href}${links.status}${links.message} \n texto : ${links.text} `)));
+  };
+};
 
 if (args.length === 3) {
   if (args[1] === '--validate' && args[2] === '--stats' || args[1] === '--stats' && args[2] === '--validate') {
@@ -44,5 +41,3 @@ if (args.length === 3) {
       .catch(error => console.log(error));
   }
 };
-
-
