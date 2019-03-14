@@ -94,11 +94,6 @@ describe('filterMdFiles', () => {
   });
 });
 
-/* describe('extractFilesContent', () => {
-  it('debería ser una función', () => {
-    expect(typeof extractFilesContent).toBe('function');
-  });
-}); */
 
 describe('extractLinks', () => {
   it('Debería de ser una función', () => {

@@ -14,13 +14,8 @@ export const filterMdFiles = (filesArr) => {
 };
 
 // une funciones y extrae los Links de cada archivo y los colocar en un objeto
-export const extractLinks = (path) => {
-  let absPath;
-  if (pathType(path) === false) {
-    absPath = convertPathToAbsolute(path);
-  }
-  
-  const arrFiles = walkIntoDirectory(absPath);
+export const extractLinks = (route) => {
+  const arrFiles = walkIntoDirectory(route);
   const arrMdFiles = filterMdFiles(arrFiles);
   let linksArr = [];
   const regEx = /!*\[(.*)\]\((.*)\)/g;
@@ -34,7 +29,7 @@ export const extractLinks = (path) => {
         const href = link.match(regExHref).toString();
         const name = link.match(regExNameLink).toString();
         linksArr.push({
-          file: elementPath,
+          file: path.resolve(elementPath),
           href: href,
           text: name,
         });
@@ -43,3 +38,4 @@ export const extractLinks = (path) => {
   });
   return linksArr;
 };
+// console.log(extractLinks('test'))

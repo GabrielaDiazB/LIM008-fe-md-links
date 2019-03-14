@@ -23,7 +23,7 @@ describe('validateLinks', () => {
     expect(typeof validateLinks).toBe('function');
   });
   it('Debería retornar un objeto con las propiedades file, href, text, status, message', (done) => {
-    return new Promise((resolve, reject) => {
+    return new Promise((resolve) => {
       validateLinks(`${process.cwd()}\\test`)
         .then((response) => {
           expect(response).toEqual(results);

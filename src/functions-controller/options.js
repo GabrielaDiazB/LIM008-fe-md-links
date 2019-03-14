@@ -2,8 +2,8 @@ import {extractLinks} from './arrays.js';
 import fetch from 'node-fetch';
 
 // Función para Validar los links
-export const validateLinks = (data) => {
-  const objLinks = extractLinks(data);
+export const validateLinks = (route) => {
+  const objLinks = extractLinks(route);
   const runLinks = objLinks.map((links) => new Promise((resolve) => {
     const linksHref = fetch(links.href);
     return linksHref
@@ -26,7 +26,6 @@ export const validateLinks = (data) => {
   }));
   return Promise.all(runLinks);
 };
-
 
 // Función ver los Stats(total de links, links únicos) de los Links
 export const getLinksStats = (path) => {
