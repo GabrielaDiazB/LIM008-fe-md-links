@@ -1,5 +1,6 @@
 import { pathType, convertPathToAbsolute, pathIsFile, pathIsDirectory, walkIntoDirectory } from '../src/functions-controller/paths.js';
 import { filterMdFiles, extractLinks } from '../src/functions-controller/arrays.js';
+const path = require('path');
 
 const input1 = [`${process.cwd()}\\test\\prueba\\archivo1.md`,
   `${process.cwd()}\\test\\prueba\\archivo2.txt`,
@@ -18,13 +19,13 @@ const output2 = [`${process.cwd()}\\test\\prueba\\archivo1.md`,
   `${process.cwd()}\\test\\prueba\\archivo5.md`];
 
 const output3 = [
-  { file: `${process.cwd()}\\test\\prueba\\archivo1.md`,
+  { file: `${path.resolve(process.cwd())}\\test\\prueba\\archivo1.md`,
     href: 'https://es.wikipedia.org/wiki/Markdown',
     text: 'Markdown'},
-  { file: `${process.cwd()}\\test\\prueba\\prueba2\\prueba3\\archivo4.md`,
+  { file: `${path.resolve(process.cwd())}\\test\\prueba\\prueba2\\prueba3\\archivo4.md`,
     href: 'https://github.com/Laboratoria/LIM008-fe-md-lin',
     text: 'Node.js'},
-  { file: `${process.cwd()}\\test\\prueba\\prueba2\\prueba3\\archivo4.md`,
+  { file: `${path.resolve(process.cwd())}\\test\\prueba\\prueba2\\prueba3\\archivo4.md`,
     href: 'https://developers.gfailoogle.com/v8/',
     text: 'motor de JavaScript V8 de Chrome' }]; 
 
@@ -45,7 +46,7 @@ describe('convertPathToAbsolute', () => {
     expect(typeof convertPathToAbsolute).toEqual('function');
   });
   it('Debería convertir la ruta relativa en absoluta', () => {
-    expect(convertPathToAbsolute('test\\prueba\\archivo1.md')).toBe(`${process.cwd()}\\test\\prueba\\archivo1.md`);
+    expect(convertPathToAbsolute('test\\prueba\\archivo1.md')).toBe(`${path.resolve(process.cwd())}\\test\\prueba\\archivo1.md`);
   });
 });
 
@@ -54,10 +55,10 @@ describe('pathIsFile', () => {
     expect(typeof pathIsFile).toEqual('function');
   });
   it('Debería decir verdadero si la ruta es un archivo', () => {
-    expect(pathIsFile(`${process.cwd()}\\test\\prueba\\archivo1.md`)).toEqual(true);
+    expect(pathIsFile(`${path.resolve(process.cwd())}\\test\\prueba\\archivo1.md`)).toEqual(true);
   });
   it('Debería decir falso si la ruta no es un archivo', () => {
-    expect(pathIsFile(`${process.cwd()}\\test\\prueba`)).toEqual(false);
+    expect(pathIsFile(`${path.resolve(process.cwd())}\\test\\prueba`)).toEqual(false);
   });
 });
 
@@ -66,10 +67,10 @@ describe('pathIsDirectory', () => {
     expect(typeof pathIsDirectory).toBe('function');
   });
   it('Debería decir verdadero si la ruta es un directorio', () => {
-    expect(pathIsDirectory(`${process.cwd()}\\test\\prueba`)).toEqual(true);
+    expect(pathIsDirectory(`${path.resolve(process.cwd())}\\test\\prueba`)).toEqual(true);
   });
   it('Debería decir falso si la ruta no es un directorio', () => {
-    expect(pathIsDirectory(`${process.cwd()}\\test\\prueba\\archivo1.md`)).toEqual(false);
+    expect(pathIsDirectory(`${path.resolve(process.cwd())}\\test\\prueba\\archivo1.md`)).toEqual(false);
   });
 });
 
@@ -78,10 +79,10 @@ describe('walkIntoDirectory', () => {
     expect(typeof walkIntoDirectory).toBe('function');
   });
   it('Si se ingresa la ruta de un archivo, debería devoler un array con el archivo', () => {
-    expect(walkIntoDirectory(`${process.cwd()}\\test\\prueba\\archivo1.md`)).toEqual([`${process.cwd()}\\test\\prueba\\archivo1.md`]);
+    expect(walkIntoDirectory(`${path.resolve(process.cwd())}\\test\\prueba\\archivo1.md`)).toEqual([`${process.cwd()}\\test\\prueba\\archivo1.md`]);
   });
   it('Si se ingresa la ruta de un directorio, debería devolver un array de todos los archivos dentro de la carpeta', () => {
-    expect(walkIntoDirectory(`${process.cwd()}\\test\\prueba`)).toEqual(output1);
+    expect(walkIntoDirectory(`${path.resolve(process.cwd())}\\test\\prueba`)).toEqual(output1);
   });
 });
 
@@ -99,6 +100,6 @@ describe('extractLinks', () => {
     expect(typeof extractLinks).toBe('function');
   });
   it('Debería devolver un array de objetos con 3 propiedades', () => {
-    expect(extractLinks(`${process.cwd()}\\test`)).toEqual(output3);
+    expect(extractLinks(`${path.resolve(process.cwd())}\\test`)).toEqual(output3);
   });
 });
